@@ -4,5 +4,11 @@ dist/
 /data/*
 !.gitkeep
 .env
+.envrc
 *.tsbuildinfo
 .DS_Store
+.trunk/
+*.log
+.vscode/
+.idea/
+*.swp
