@@ -14,7 +14,7 @@ export default Effect.gen(function*() {
         dateOfBirth DATE,
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
         updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        FOREIGN KEY (ownerId) REFERENCES groups(id)
+        FOREIGN KEY (groupId) REFERENCES groups(id)
       )
     `,
     orElse: () =>

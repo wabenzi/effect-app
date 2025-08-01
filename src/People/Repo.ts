@@ -1,6 +1,7 @@
 import { Model } from "@effect/sql"
 import { Effect } from "effect"
 import { Person } from "../Domain/Person.js"
+import { makeTestLayer } from "../lib/Layer.js"
 import { SqlLive } from "../Sql.js"
 
 export class PeopleRepo extends Effect.Service<PeopleRepo>()("People/Repo", {
@@ -10,4 +11,6 @@ export class PeopleRepo extends Effect.Service<PeopleRepo>()("People/Repo", {
     idColumn: "id"
   }),
   dependencies: [SqlLive]
-}) {}
+}) {
+  static Test = makeTestLayer(PeopleRepo)({})
+}
