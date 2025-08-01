@@ -5,6 +5,7 @@ import { Group, GroupId } from "app/Domain/Group"
 import { AccountId } from "app/Domain/Account"
 import { withSystemActor } from "app/Domain/Policy"
 import { SqlTest } from "app/Sql"
+import { makeTestLayer } from "app/lib/Layer"
 import { DateTime, Effect, Layer, Option, pipe } from "effect"
 
 describe("Groups", () => {
@@ -23,8 +24,8 @@ describe("Groups", () => {
         Groups.DefaultWithoutDependencies.pipe(
           Layer.provideMerge(SqlTest),
           Layer.provideMerge(
-            Layer.succeed(GroupsRepo, {
-              insert: (group) =>
+            makeTestLayer(GroupsRepo)({
+              insert: (group: typeof Group.insert.Type) =>
                 Effect.map(
                   DateTime.now,
                   (now) =>
@@ -61,7 +62,7 @@ describe("Groups", () => {
         Groups.DefaultWithoutDependencies.pipe(
           Layer.provideMerge(SqlTest),
           Layer.provideMerge(
-            Layer.succeed(GroupsRepo, {
+            makeTestLayer(GroupsRepo)({
               findById: (id: GroupId) =>
                 Effect.succeed(
                   Option.some(

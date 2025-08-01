@@ -28,10 +28,11 @@ test/
 ```
 
 ### 2. Package.json Scripts Added
-- `test:unit` - Run unit tests only
-- `test:integration` - **NEW**: Run shell script-based integration tests
-- `test:integration-only` - **NEW**: Run just the client tests (requires server)
-- `test:coverage` - Run with coverage reporting (80% threshold)
+- `test:unit` - Run unit tests only (with mocks)
+- `test:integration` - Run shell script-based integration tests
+- `test:integration-only` - Run just the client tests (requires server)
+- `test:coverage` - **FIXED**: Run unit tests with coverage (mocked dependencies, no server required)
+- `test:coverage:all` - Run all tests with coverage (requires server for integration tests)
 - `test:ui` - Interactive test runner
 - `test:watch` - Continuous testing mode
 - `openapi:generate` - Generate OpenAPI specification
@@ -68,11 +69,14 @@ test/
 - ✅ Health check endpoint validation
 - ✅ Group creation with authenticated requests
 
-### 5. Test Coverage Configuration
+### 5. Test Coverage Configuration ⭐ IMPROVED
 - **Coverage Provider**: v8
 - **Thresholds**: 80% for statements, branches, functions, and lines
 - **Reports**: JSON, HTML, and text formats
 - **Excludes**: node_modules, .trunk directories
+- **Unit Coverage**: `npm run test:coverage` - Fast, mocked dependencies, no server required
+- **Full Coverage**: `npm run test:coverage:all` - Includes integration tests, requires server
+- **Best Practice**: Use unit coverage for development/CI, full coverage for comprehensive analysis
 
 ### 6. Mock Layer System (TestLayers.ts)
 Created comprehensive mock factories for:
@@ -203,7 +207,7 @@ None! All tests are now passing successfully.
 # Run all tests
 npm test
 
-# Run only unit tests  
+# Run only unit tests (with mocked dependencies)
 npm run test:unit
 
 # Run integration tests (with server lifecycle)
@@ -212,8 +216,11 @@ npm run test:integration
 # Run integration tests only (requires running server)
 npm run test:integration-only
 
-# Run with coverage report
+# Run unit tests with coverage report (mocked dependencies, no server required) ⭐
 npm run test:coverage
+
+# Run all tests with coverage report (requires server for integration tests)
+npm run test:coverage:all
 
 # Open interactive test UI
 npm run test:ui

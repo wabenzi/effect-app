@@ -1,0 +1,26 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+.env
+.envrc
+.trunk
+.tsbuildinfo
+.vscode
+test
+docs
+*.md
+.DS_Store
+coverage
+.nyc_output
+# Remove dist from dockerignore since we want to copy it
+# dist
+data/*.db
+data/*.db-journal
+src/
+tsconfig*.json
+deploy.sh
+test-deployment.sh
+template.yaml
+samconfig.toml

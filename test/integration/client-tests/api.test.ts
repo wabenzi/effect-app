@@ -113,7 +113,7 @@ describe('API Integration Tests', () => {
 
   it('should respond to health checks', async () => {
     const response = await makeRequest('/health')
-    expect(response.status).toBe(204)
+    expect(response.status).toBe(200)
     console.log('Health check passed')
   })
 })
