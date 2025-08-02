@@ -20,7 +20,7 @@ data/*.db
 data/*.db-journal
 src/
 tsconfig*.json
-deploy.sh
-test-deployment.sh
+scripts/deploy.sh
+test/
 template.yaml
 samconfig.toml

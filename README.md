@@ -1,12 +1,50 @@
-# Hello World AWS Lambda and Amazon API Gateway REST API (Node.js)
+# Effect-TS HTTP API on AWS
 
-This project contains source code and supporting files for a serverless application that you can deploy with the AWS SAM CLI. It includes the following files and folders.
+This project contains a modern TypeScript HTTP API built with Effect-TS, deployed on AWS using ECS Fargate with API Gateway integration.
 
-- hello_world - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- template.yaml - A template that defines the application's AWS resources.
+## Project Structure
 
-The application uses several AWS resources. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code. This application will deploy a Lambda function, as well as an API Gateway REST API that will be automatically created based on the Lambda function's Event mapping.
+- `src/` - Effect-TS application source code
+- `infrastructure/` - AWS CDK infrastructure definitions
+- `test/` - Unit and integration tests
+- `test/scripts/` - Deployment and API testing scripts
+- `Dockerfile` - Multi-arch container configuration
+
+## Architecture
+
+The application uses AWS ECS Fargate with the following components:
+- **ECS Fargate**: ARM64 containers for cost-effective serverless compute
+- **Application Load Balancer**: Internal load balancing with health checks
+- **API Gateway v2**: HTTP API with VPC Link integration
+- **CloudFormation**: Infrastructure as Code via AWS CDK
+
+## Testing Scripts
+
+The `test/scripts/` directory contains consolidated testing tools:
+
+- **`health-check.sh`**: Quick health endpoint validation
+- **`api-test.sh`**: Comprehensive API testing with load testing
+- **`deployment-test.sh`**: AWS infrastructure validation
+- **`integration-test.sh`**: Local vs AWS environment comparison
+- **`run-all-tests.sh`**: Execute all tests in sequence
+
+### Quick Testing
+
+```bash
+# Quick health check
+./test/scripts/health-check.sh
+
+# Full API test with load testing
+./test/scripts/api-test.sh --load-test
+
+# Validate deployment
+./test/scripts/deployment-test.sh
+
+# Run all tests
+./test/scripts/run-all-tests.sh
+```
+
+See `test/scripts/README.md` for detailed documentation.
 
 If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
 The AWS Toolkit is an open source plug-in for popular IDEs that uses the AWS SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.

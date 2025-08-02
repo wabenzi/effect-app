@@ -62,12 +62,12 @@ Your AWS user/role needs the following permissions:
 
 2. **Deploy to AWS**
    ```bash
-   ./deploy.sh
+   ./scripts/deploy.sh
    ```
 
 3. **Test the deployment**
    ```bash
-   ./test-deployment.sh
+   ./test/scripts/deployment-test.sh
    ```
 
 ## Configuration
@@ -144,7 +144,7 @@ If you prefer manual deployment:
 
 ### Automated Testing
 ```bash
-./test-deployment.sh
+./test/scripts/deployment-test.sh
 ```
 
 ### Manual Testing
@@ -253,7 +253,7 @@ cpu: 512,              // Increase from 256
 
 To destroy all AWS resources:
 ```bash
-./deploy.sh destroy
+./scripts/deploy.sh destroy
 ```
 
 Or manually:

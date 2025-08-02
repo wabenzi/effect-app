@@ -1,0 +1,10 @@
+*.js
+*.d.ts
+node_modules
+*.generated.ts
+cdk.out
+.cdk.staging
+.parcel-cache
+*.log
+.env
+.DS_Store

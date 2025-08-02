@@ -90,12 +90,12 @@ jobs:
       run: npm install -g aws-cdk
     
     - name: Deploy to AWS
-      run: ./deploy.sh
+      run: ./scripts/deploy.sh
       env:
         AWS_REGION: ${{ env.AWS_REGION }}
     
     - name: Test deployment
-      run: ./test-deployment.sh
+      run: ./test/scripts/deployment-test.sh
       env:
         AWS_REGION: ${{ env.AWS_REGION }}
     
