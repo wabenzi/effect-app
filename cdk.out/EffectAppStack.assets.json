@@ -1,0 +1,36 @@
+{
+  "version": "45.0.0",
+  "files": {
+    "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200": {
+      "displayName": "EffectAppStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "822812326070-us-west-2-4b568d45": {
+          "bucketName": "cdk-hnb659fds-assets-822812326070-us-west-2",
+          "objectKey": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::822812326070:role/cdk-hnb659fds-file-publishing-role-822812326070-us-west-2"
+        }
+      }
+    },
+    "793d599ddee161fb505db09bc9ecaa1d6ede2fa3139418a5253d6a5f1508a589": {
+      "displayName": "EffectAppStack Template",
+      "source": {
+        "path": "EffectAppStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "822812326070-us-west-2-dacb803e": {
+          "bucketName": "cdk-hnb659fds-assets-822812326070-us-west-2",
+          "objectKey": "793d599ddee161fb505db09bc9ecaa1d6ede2fa3139418a5253d6a5f1508a589.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::822812326070:role/cdk-hnb659fds-file-publishing-role-822812326070-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

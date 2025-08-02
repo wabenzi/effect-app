@@ -1,0 +1,36 @@
+{
+  "version": "45.0.0",
+  "files": {
+    "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200": {
+      "displayName": "EffectAppStackLocal/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "000000000000-us-east-1-fa324105": {
+          "bucketName": "cdk-hnb659fds-assets-000000000000-us-east-1",
+          "objectKey": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::000000000000:role/cdk-hnb659fds-file-publishing-role-000000000000-us-east-1"
+        }
+      }
+    },
+    "91d307896d8a84bb6238ff6e6c9a767a0bebda27070ceed1bc6dafec66e14837": {
+      "displayName": "EffectAppStackLocal Template",
+      "source": {
+        "path": "EffectAppStackLocal.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "000000000000-us-east-1-e4f30cfb": {
+          "bucketName": "cdk-hnb659fds-assets-000000000000-us-east-1",
+          "objectKey": "91d307896d8a84bb6238ff6e6c9a767a0bebda27070ceed1bc6dafec66e14837.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::000000000000:role/cdk-hnb659fds-file-publishing-role-000000000000-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

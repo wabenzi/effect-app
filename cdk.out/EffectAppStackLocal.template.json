@@ -1,0 +1,594 @@
+{
+ "Resources": {
+  "EffectAppVpc81CB427B": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/Resource"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet1Subnet0AF2A853": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "PublicSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1/Subnet"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet1RouteTable122FC0DD": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1/RouteTable"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet1RouteTableAssociation0CD839A5": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet1RouteTable122FC0DD"
+    },
+    "SubnetId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet1Subnet0AF2A853"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet1DefaultRoute7AEC1742": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EffectAppVpcIGWAF58C125"
+    },
+    "RouteTableId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet1RouteTable122FC0DD"
+    }
+   },
+   "DependsOn": [
+    "EffectAppVpcVPCGW19367B91"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet1/DefaultRoute"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet2Subnet1A948819": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "PublicSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2/Subnet"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet2RouteTableEB131554": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2/RouteTable"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet2RouteTableAssociation627E5C0F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet2RouteTableEB131554"
+    },
+    "SubnetId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet2Subnet1A948819"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2/RouteTableAssociation"
+   }
+  },
+  "EffectAppVpcPublicSubnetSubnet2DefaultRoute3C7FBE91": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EffectAppVpcIGWAF58C125"
+    },
+    "RouteTableId": {
+     "Ref": "EffectAppVpcPublicSubnetSubnet2RouteTableEB131554"
+    }
+   },
+   "DependsOn": [
+    "EffectAppVpcVPCGW19367B91"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/PublicSubnetSubnet2/DefaultRoute"
+   }
+  },
+  "EffectAppVpcIGWAF58C125": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EffectAppStackLocal/EffectAppVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/IGW"
+   }
+  },
+  "EffectAppVpcVPCGW19367B91": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "EffectAppVpcIGWAF58C125"
+    },
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/VPCGW"
+   }
+  },
+  "EffectAppVpcRestrictDefaultSecurityGroupCustomResourceF9111A26": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "EffectAppVpc81CB427B",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": "000000000000"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppVpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:us-east-1:000000000000:security-group/",
+             {
+              "Fn::GetAtt": [
+               "EffectAppVpc81CB427B",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-000000000000-us-east-1",
+     "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
+    "aws:asset:property": "Code"
+   }
+  },
+  "EffectAppClusterB9338A9D": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterSettings": [
+     {
+      "Name": "containerInsights",
+      "Value": "enabled"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppCluster/Resource"
+   }
+  },
+  "EffectAppLogGroupD71ED9A7": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 7
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppLogGroup/Resource"
+   }
+  },
+  "EffectAppTaskDefTaskRoleA6804ACC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppTaskDef/TaskRole/Resource"
+   }
+  },
+  "EffectAppTaskDef7570C5C0": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": "nginx:alpine",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "EffectAppLogGroupD71ED9A7"
+        },
+        "awslogs-stream-prefix": "EffectApp",
+        "awslogs-region": "us-east-1"
+       }
+      },
+      "Name": "EffectAppContainer",
+      "PortMappings": [
+       {
+        "ContainerPort": 80,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "EffectAppTaskDefExecutionRole87432062",
+      "Arn"
+     ]
+    },
+    "Family": "EffectAppStackLocalEffectAppTaskDef67E05A8D",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "EffectAppTaskDefTaskRoleA6804ACC",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppTaskDef/Resource"
+   }
+  },
+  "EffectAppTaskDefExecutionRole87432062": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppTaskDef/ExecutionRole/Resource"
+   }
+  },
+  "EffectAppTaskDefExecutionRoleDefaultPolicy5C658B09": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EffectAppLogGroupD71ED9A7",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EffectAppTaskDefExecutionRoleDefaultPolicy5C658B09",
+    "Roles": [
+     {
+      "Ref": "EffectAppTaskDefExecutionRole87432062"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppTaskDef/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "EffectAppServiceB61B984D": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "EffectAppClusterB9338A9D"
+    },
+    "DeploymentConfiguration": {
+     "Alarms": {
+      "AlarmNames": [],
+      "Enable": false,
+      "Rollback": false
+     },
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 1,
+    "EnableECSManagedTags": false,
+    "LaunchType": "FARGATE",
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "EffectAppServiceSecurityGroupABC6353E",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "EffectAppVpcPublicSubnetSubnet1Subnet0AF2A853"
+       },
+       {
+        "Ref": "EffectAppVpcPublicSubnetSubnet2Subnet1A948819"
+       }
+      ]
+     }
+    },
+    "TaskDefinition": {
+     "Ref": "EffectAppTaskDef7570C5C0"
+    }
+   },
+   "DependsOn": [
+    "EffectAppTaskDefTaskRoleA6804ACC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppService/Service"
+   }
+  },
+  "EffectAppServiceSecurityGroupABC6353E": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EffectAppStackLocal/EffectAppService/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EffectAppVpc81CB427B"
+    }
+   },
+   "DependsOn": [
+    "EffectAppTaskDefTaskRoleA6804ACC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/EffectAppService/SecurityGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21RTW+DMAz9Lb2HrEM97Np1WjVp0hBMvU4hdakLxChxWlWI/75QoFTTTn5+/nq2YxkvX+RyoS4u0vsyqjCXbcZKlyJQPy3oWLa7RovNweySjUh8XqHOfG6Ae25GKXmGb5VXMPMzt3aONCpGMvfkHnwYBhsyt4rhoq7jmNFbcxByrMGwyEB7i3zdWvLNbcAj0QnQTrabyrvQrg9P8F3ZQvUaXPkGBzQ4KfjLkGGFBuwDN9ZmYM+oh60G2ImKijDvk4q7ngl3AlUt25SGO9xsQuFmt90G1HUiBUfe9l2DTqpnN5T8H0osnXEP9lU5EOGcwOFNBZqir/ny3HjuhKE9yJN7OscruZLPi5NDjKw3jDXIdLC/KipwKvMBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "EffectAppStackLocal/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ClusterName": {
+   "Description": "ECS Cluster Name",
+   "Value": {
+    "Ref": "EffectAppClusterB9338A9D"
+   }
+  },
+  "ServiceName": {
+   "Description": "ECS Service Name",
+   "Value": {
+    "Fn::GetAtt": [
+     "EffectAppServiceB61B984D",
+     "Name"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
