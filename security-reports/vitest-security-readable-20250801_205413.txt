@@ -1,0 +1,246 @@
+
+ RUN  v3.2.4 /Users/leonhardt/dev/effect-app
+
+ ✓ test/security/input-validation.test.ts > Security Test Suite - Input Validation > SQL Injection Prevention > should prevent SQL injection in email fields 41ms
+ × test/security/input-validation.test.ts > Security Test Suite - Input Validation > SQL Injection Prevention > should prevent SQL injection in name fields 18ms
+   → expected 'Robert\'; DROP TABLE people; --' not to contain 'DROP TABLE'
+ × test/security/input-validation.test.ts > Security Test Suite - Input Validation > XSS Prevention > should prevent XSS in user input fields 13ms
+   → expected 'Test Group <script>alert(\'XSS\')</sc…' not to contain '<script>'
+ ✓ test/security/input-validation.test.ts > Security Test Suite - Input Validation > XSS Prevention > should prevent XSS in JSON responses 8ms
+ × test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Security Headers > should include required security headers 19ms
+   → expected null to be 'DENY' // Object.is equality
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Security Headers > should set appropriate CORS headers 3ms
+ × test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Exposure Prevention > should not expose sensitive data in API responses 27ms
+   → expected '019868ea-8561-7528-944a-3cb8a046a942' to be falsy
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Exposure Prevention > should redact sensitive information in logs 15ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Exposure Prevention > should handle error responses without data leakage 13ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Integrity > should maintain referential integrity 15ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Integrity > should validate data consistency 15ms
+ ✓ test/security/input-validation.test.ts > Security Test Suite - Input Validation > Command Injection Prevention > should prevent command injection in input fields 31ms
+ × test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate email format strictly 33ms
+   → expected 500 to be 400 // Object.is equality
+ × test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate name fields securely 10ms
+   → expected 200 to be 400 // Object.is equality
+ × test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate JSON payload structure 8ms
+   → expected 500 to be 400 // Object.is equality
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Sanitization > should sanitize input data 23ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Sanitization > should normalize data formats 30ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Privacy Protection > should implement data minimization 7ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Privacy Protection > should handle data deletion properly 7ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Backup and Recovery Security > should not expose backup files publicly 12ms
+ ✓ test/security/data-protection.test.ts > Security Test Suite - Data Protection > Backup and Recovery Security > should not expose configuration files 5ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Rate Limiting > should implement rate limiting on authentication endpoints 86ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Rate Limiting > should implement rate limiting on API endpoints 71ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > HTTPS and TLS Security > should enforce HTTPS in production 0ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > HTTPS and TLS Security > should have proper TLS configuration 0ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Error Handling Security > should not expose sensitive information in error messages 4ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Error Handling Security > should handle malformed requests gracefully 4ms
+ × test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Cookie Security > should set secure cookie attributes 4ms
+   → expected 'token=019868ea-8610-727c-9e1d-3b7d2cc…' to contain 'SameSite='
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Cookie Security > should properly handle cookie-based authentication 5ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Resource Protection > should prevent path traversal attacks 5ms
+ ✓ test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Resource Protection > should protect against directory listing 4ms
+ ✓ test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Token Security Tests > should reject requests with malformed tokens 56ms
+ × test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Token Security Tests > should reject requests without authentication tokens 8ms
+   → expected 404 to be 403 // Object.is equality
+ ✓ test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Token Security Tests > should prevent token fixation attacks 10ms
+ ✓ test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Token Security Tests > should generate cryptographically secure tokens 164ms
+ ✓ test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Authorization Tests > should prevent cross-user data access 4ms
+ × test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Authorization Tests > should enforce group ownership policies 5ms
+   → expected 404 to be 403 // Object.is equality
+ × test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Session Management > should handle concurrent sessions securely 5ms
+   → Unexpected end of JSON input
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Token Security Tests > should reject requests without authentication tokens
+AssertionError: expected 404 to be 403 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 403[39m
+[31m+ 404[39m
+
+ ❯ test/security/auth-security.test.ts:57:33
+     55|       for (const endpoint of protectedEndpoints) {
+     56|         const response = await fetch(`${baseUrl}${endpoint}`)
+     57|         expect(response.status).toBe(403)
+       |                                 ^
+     58|         
+     59|         const body = await response.json()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Authorization Tests > should enforce group ownership policies
+AssertionError: expected 404 to be 403 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 403[39m
+[31m+ 404[39m
+
+ ❯ test/security/auth-security.test.ts:199:37
+    197|       })
+    198| 
+    199|       expect(updateResponse.status).toBe(403)
+       |                                     ^
+    200|     })
+    201|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  test/security/auth-security.test.ts > Security Test Suite - Authentication & Authorization > Session Management > should handle concurrent sessions securely
+SyntaxError: Unexpected end of JSON input
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  test/security/data-protection.test.ts > Security Test Suite - Data Protection > Data Exposure Prevention > should not expose sensitive data in API responses
+AssertionError: expected '019868ea-8561-7528-944a-3cb8a046a942' to be falsy
+
+[32m- Expected:[39m 
+false
+
+[31m+ Received:[39m 
+"019868ea-8561-7528-944a-3cb8a046a942"
+
+ ❯ test/security/data-protection.test.ts:21:36
+     19| 
+     20|       // Should not expose raw access tokens
+     21|       expect(userData.accessToken).toBeFalsy()
+       |                                    ^
+     22|       
+     23|       // Should not expose internal IDs that could be enumerated
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Security Headers > should include required security headers
+AssertionError: expected null to be 'DENY' // Object.is equality
+
+[32m- Expected:[39m 
+"DENY"
+
+[31m+ Received:[39m 
+null
+
+ ❯ test/security/infrastructure-security.test.ts:15:55
+     13|       
+     14|       // Critical security headers
+     15|       expect(response.headers.get('x-frame-options')).toBe('DENY')
+       |                                                       ^
+     16|       expect(response.headers.get('x-content-type-options')).toBe('nos…
+     17|       expect(response.headers.get('x-xss-protection')).toBe('1; mode=b…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  test/security/infrastructure-security.test.ts > Security Test Suite - Infrastructure Security > Cookie Security > should set secure cookie attributes
+AssertionError: expected 'token=019868ea-8610-727c-9e1d-3b7d2cc…' to contain 'SameSite='
+
+Expected: [32m"SameSite="[39m
+Received: [31m"token=019868ea-8610-727c-9e1d-3b7d2cc2ddb5; HttpOnly; Secure"[39m
+
+ ❯ test/security/infrastructure-security.test.ts:245:25
+    243|       }
+    244|       expect(setCookie).toContain('HttpOnly')
+    245|       expect(setCookie).toContain('SameSite=')
+       |                         ^
+    246|       
+    247|       // Should have appropriate expiration
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  test/security/input-validation.test.ts > Security Test Suite - Input Validation > SQL Injection Prevention > should prevent SQL injection in name fields
+AssertionError: expected 'Robert\'; DROP TABLE people; --' not to contain 'DROP TABLE'
+
+Expected: [32m"DROP TABLE"[39m
+Received: [31m"[7mRobert'; [27mDROP TABLE[7m people; --[27m"[39m
+
+ ❯ test/security/input-validation.test.ts:82:44
+     80|           const personData = await personResponse.json()
+     81|           // Name should be sanitized
+     82|           expect(personData.firstName).not.toContain("DROP TABLE")
+       |                                            ^
+     83|           expect(personData.firstName).not.toContain("INSERT INTO")
+     84|           expect(personData.firstName).not.toContain("UNION SELECT")
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  test/security/input-validation.test.ts > Security Test Suite - Input Validation > XSS Prevention > should prevent XSS in user input fields
+AssertionError: expected 'Test Group <script>alert(\'XSS\')</sc…' not to contain '<script>'
+
+Expected: [32m"[7m<[27mscript>"[39m
+Received: [31m"[7mTest Group <script>alert('XSS')</[27mscript>"[39m
+
+ ❯ test/security/input-validation.test.ts:138:38
+    136|           const groupData = await groupResponse.json()
+    137|           // Should be sanitized
+    138|           expect(groupData.name).not.toContain("<script>")
+       |                                      ^
+    139|           expect(groupData.name).not.toContain("javascript:")
+    140|           expect(groupData.name).not.toContain("onerror=")
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate email format strictly
+AssertionError: expected 500 to be 400 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 500[39m
+
+ ❯ test/security/input-validation.test.ts:225:33
+    223|         })
+    224| 
+    225|         expect(response.status).toBe(400)
+       |                                 ^
+    226|         const errorBody = await response.json()
+    227|         expect(errorBody).toHaveProperty('_tag')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+ FAIL  test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate name fields securely
+AssertionError: expected 200 to be 400 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 200[39m
+
+ ❯ test/security/input-validation.test.ts:271:33
+    269|         })
+    270| 
+    271|         expect(response.status).toBe(400)
+       |                                 ^
+    272|       }
+    273|     })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  test/security/input-validation.test.ts > Security Test Suite - Input Validation > Data Validation > should validate JSON payload structure
+AssertionError: expected 500 to be 400 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 500[39m
+
+ ❯ test/security/input-validation.test.ts:293:33
+    291|         })
+    292| 
+    293|         expect(response.status).toBe(400)
+       |                                 ^
+    294|       }
+    295|     })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  4 failed (4)
+      Tests  11 failed | 27 passed (38)
+   Start at  20:54:16
+   Duration  632ms (transform 108ms, setup 0ms, collect 287ms, tests 793ms, environment 0ms, prepare 209ms)
+

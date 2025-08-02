@@ -1,0 +1,2 @@
+npm warn Unknown cli config "--human-readable". This will stop working in the next major version of npm.
+found 0 vulnerabilities
