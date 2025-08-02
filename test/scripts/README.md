@@ -106,6 +106,27 @@ This directory contains consolidated test scripts for the Effect-TS API project.
 ./integration-test.sh --local-url http://localhost:8080
 ```
 
+### 5. `run-all-tests.sh`
+**Purpose**: Execute all test scripts in sequence for comprehensive validation.
+
+**Features**:
+- Runs all test scripts in logical order
+- Quick mode to skip intensive tests
+- Verbose output option
+- Error handling and reporting
+
+**Usage**:
+```bash
+# Run all tests in sequence
+./run-all-tests.sh
+
+# Quick test run (skip load testing and detailed checks)
+./run-all-tests.sh --quick
+
+# Verbose output
+./run-all-tests.sh --verbose
+```
+
 ## Script Selection Guide
 
 | Use Case | Recommended Script | Options |
@@ -116,6 +137,7 @@ This directory contains consolidated test scripts for the Effect-TS API project.
 | Compare local vs AWS | `integration-test.sh` | Default (tests both) |
 | Performance testing | `api-test.sh` | `--load-test` |
 | Local development | `integration-test.sh` | `--local-only` |
+| Run all tests | `run-all-tests.sh` | `--quick` for fast run |
 
 ## Dependencies
 
@@ -185,6 +207,15 @@ npm start
 
 # Follow with API testing
 ./test/scripts/api-test.sh --load-test
+```
+
+### Complete Test Suite
+```bash
+# Run all tests in sequence
+./test/scripts/run-all-tests.sh
+
+# Quick run (skip intensive tests)
+./test/scripts/run-all-tests.sh --quick
 ```
 
 ### Development Workflow
