@@ -40,9 +40,9 @@
     "aws:test:load": "./test/scripts/api-test.sh --load-test",
     "aws:logs": "aws logs tail /ecs/effect-app-fargate --follow --region us-west-2",
     "aws:status": "./test/scripts/deployment-test.sh --quick",
-    "aws:monitor": "./monitor-aws.sh check",
-    "aws:monitor:continuous": "./monitor-aws.sh monitor",
-    "aws:alerts": "./monitor-aws.sh alerts"
+    "aws:monitor": "./scripts/monitor-aws.sh check",
+    "aws:monitor:continuous": "./scripts/monitor-aws.sh monitor",
+    "aws:alerts": "./scripts/monitor-aws.sh alerts"
   },
   "keywords": [],
   "author": "",
