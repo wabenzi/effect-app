@@ -1,5 +1,13 @@
-import { Schema } from "effect"
+import { Schema, Effect } from "effect"
 import DOMPurify from 'isomorphic-dompurify'
+
+// Simple validation middleware function
+export const validationMiddleware = (app: any) =>
+  Effect.gen(function*() {
+    // Basic validation logic would go here
+    // For now, just pass through the app
+    return app
+  })
 
 // Input sanitization utilities
 export const sanitizeString = (input: string): string => {

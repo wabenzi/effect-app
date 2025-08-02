@@ -7,6 +7,10 @@ import { Api } from "./Api.js"
 import { HttpGroupsLive } from "./Groups/Http.js"
 import { HttpPeopleLive } from "./People/Http.js"
 import { HealthHttp } from "./Health/Http.js"
+// Security middleware imports for future integration
+// import { rateLimitMiddleware, RateLimitConfig } from "./Http/RateLimit.js"
+// import { securityHeadersMiddleware } from "./Http/SecurityHeaders.js"
+// import { validationMiddleware } from "./Http/Validation.js"
 
 // Custom middleware to log full HTTP payload
 const payloadLogger = HttpMiddleware.make((app) =>
@@ -40,6 +44,21 @@ const payloadLogger = HttpMiddleware.make((app) =>
   )
 )
 
+// TODO: Security middleware integration
+// const rateLimitConfig: RateLimitConfig = {
+//   maxRequests: 100,
+//   windowMs: 60000, // 1 minute
+//   blockDurationMs: 300000 // 5 minutes
+// }
+
+// TODO: Compose security middleware when ready
+// const securityMiddleware = (app: any) =>
+//   securityHeadersMiddleware(
+//     validationMiddleware(
+//       rateLimitMiddleware(rateLimitConfig)(app)
+//     )
+//   )
+
 const ApiLive = Layer.provide(HttpApiBuilder.api(Api), [
   HttpAccountsLive,
   HttpGroupsLive,
@@ -47,7 +66,15 @@ const ApiLive = Layer.provide(HttpApiBuilder.api(Api), [
   HealthHttp
 ])
 
-export const HttpLive = HttpApiBuilder.serve((app) => payloadLogger(HttpMiddleware.logger(app))).pipe(
+export const HttpLive = HttpApiBuilder.serve((app) =>
+  payloadLogger(
+    HttpMiddleware.logger(app)
+    // TODO: Add security middleware when integration is complete
+    // securityMiddleware(
+    //   HttpMiddleware.logger(app)
+    // )
+  )
+).pipe(
   Layer.provide(HttpApiSwagger.layer()),
   Layer.provide(HttpApiBuilder.middlewareOpenApi()),
   Layer.provide(HttpApiBuilder.middlewareCors()),

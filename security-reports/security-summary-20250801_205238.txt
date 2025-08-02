@@ -1,0 +1,44 @@
+======================================
+Security Test Suite Summary Report
+======================================
+Timestamp: Fri Aug  1 20:52:43 PDT 2025
+Base URL: http://localhost:3000
+Report Directory: security-reports
+
+--- Files Generated ---
+security-reports/auth-security-20250801_205238.txt 558 bytes Aug 1 20:52
+security-reports/npm-audit-20250801_205238.json 365 bytes Aug 1 20:52
+security-reports/npm-audit-readable-20250801_205238.txt 129 bytes Aug 1 20:52
+security-reports/rate-limiting-20250801_205238.txt 584 bytes Aug 1 20:52
+security-reports/security-headers-20250801_205238.txt 190 bytes Aug 1 20:52
+security-reports/security-summary-20250801_205238.txt 245 bytes Aug 1 20:52
+security-reports/vitest-security-20250801_205238.json 18560 bytes Aug 1 20:52
+security-reports/vitest-security-readable-20250801_205238.txt 15247 bytes Aug 1 20:52
+security-reports/vulnerability-scan-20250801_205238.txt 617 bytes Aug 1 20:52
+
+--- npm Audit Summary ---
+info: 0
+low: 0
+moderate: 0
+high: 0
+critical: 0
+total: 0
+
+--- Security Headers Check ---
+0
+0
+ security headers found
+
+--- Recommendations ---
+1. Review all generated reports in security-reports
+2. Fix any HIGH or CRITICAL vulnerabilities found
+3. Implement missing security headers
+4. Verify rate limiting is working properly
+5. Check authentication and authorization tests
+
+--- Next Steps ---
+1. Address identified vulnerabilities
+2. Implement additional security controls
+3. Schedule regular security testing
+4. Update security policies as needed
+

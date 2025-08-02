@@ -42,7 +42,12 @@
     "aws:status": "./test/scripts/deployment-test.sh --quick",
     "aws:monitor": "./scripts/monitor-aws.sh check",
     "aws:monitor:continuous": "./scripts/monitor-aws.sh monitor",
-    "aws:alerts": "./scripts/monitor-aws.sh alerts"
+    "aws:alerts": "./scripts/monitor-aws.sh alerts",
+    "test:security": "./test/scripts/security-test.sh",
+    "test:security:auth": "vitest run test/security/auth-security.test.ts",
+    "test:security:validation": "vitest run test/security/input-validation.test.ts",
+    "test:security:infrastructure": "vitest run test/security/infrastructure-security.test.ts",
+    "test:security:data": "vitest run test/security/data-protection.test.ts"
   },
   "keywords": [],
   "author": "",
@@ -85,6 +90,7 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
+    "isomorphic-dompurify": "^2.26.0",
     "uuid": "^11.0.2"
   }
 }

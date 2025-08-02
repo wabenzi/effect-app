@@ -1,0 +1,16 @@
+=== Authentication & Authorization Test ===
+URL: http://localhost:3000
+Timestamp: Fri Aug  1 20:52:39 PDT 2025
+
+--- Unauthenticated Access Test ---
+Testing /users/me without authentication:
+{"actorId":-1,"entity":"User","action":"read","_tag":"Unauthorized"}Status: 403
+
+--- Malformed Token Test ---
+Testing with malformed token:
+{"actorId":-1,"entity":"User","action":"read","_tag":"Unauthorized"}Status: 403
+
+--- Token Injection Test ---
+Testing with SQL injection in token:
+{"actorId":-1,"entity":"User","action":"read","_tag":"Unauthorized"}Status: 403
+

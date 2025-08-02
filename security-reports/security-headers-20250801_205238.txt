@@ -1,0 +1,10 @@
+=== Security Headers Test ===
+URL: http://localhost:3000
+Timestamp: Fri Aug  1 20:52:39 PDT 2025
+
+--- Health Endpoint Headers ---
+No security headers found
+
+--- CORS Test ---
+vary: Origin
+
