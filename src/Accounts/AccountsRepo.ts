@@ -2,7 +2,7 @@ import { Model } from "@effect/sql"
 import { Effect } from "effect"
 import { Account } from "../Domain/Account.js"
 import { makeTestLayer } from "../lib/Layer.js"
-import { SqlLive } from "../Sql.js"
+import { SqlLive } from "../SqlAuto.js"
 
 export const make = Model.makeRepository(Account, {
   tableName: "accounts",

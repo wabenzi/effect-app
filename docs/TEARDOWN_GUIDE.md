@@ -60,7 +60,7 @@ The teardown script will remove the following AWS resources:
 
 ### Confirmation Required
 The script requires explicit confirmation unless `--force` is used:
-```
+```text
 ⚠️  WARNING: This will permanently delete ALL AWS resources!
 
 Resources to be deleted:

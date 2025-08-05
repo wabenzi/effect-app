@@ -8,7 +8,7 @@ import { Account } from "./Domain/Account.js"
 import { policyRequire } from "./Domain/Policy.js"
 import type { UserId } from "./Domain/User.js"
 import { User, UserNotFound, UserWithSensitive } from "./Domain/User.js"
-import { SqlLive, SqlTest } from "./Sql.js"
+import { SqlLive, SqlTest } from "./SqlAuto.js"
 import { Uuid } from "./Uuid.js"
 
 export class Accounts extends Effect.Service<Accounts>()("Accounts", {

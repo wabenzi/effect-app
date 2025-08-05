@@ -7,6 +7,8 @@ import * as apigatewayv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrat
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ecr from 'aws-cdk-lib/aws-ecr';
+import * as rds from 'aws-cdk-lib/aws-rds';
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 
 export class EffectAppStack extends cdk.Stack {
@@ -28,7 +30,49 @@ export class EffectAppStack extends cdk.Stack {
           name: 'PrivateSubnet',
           subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
         },
+        {
+          cidrMask: 24,
+          name: 'DatabaseSubnet',
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+        },
       ],
+    });
+
+    // Create Aurora PostgreSQL cluster
+    const dbCredentials = rds.Credentials.fromGeneratedSecret('postgres', {
+      secretName: 'effect-app/aurora-postgres-credentials',
+    });
+
+    // Create security group for Aurora PostgreSQL
+    const dbSecurityGroup = new ec2.SecurityGroup(this, 'AuroraPostgresSecurityGroup', {
+      vpc,
+      allowAllOutbound: false,
+      securityGroupName: 'aurora-postgres-security-group',
+      description: 'Security group for Aurora PostgreSQL cluster',
+    });
+
+    // Create Aurora PostgreSQL cluster
+    const auroraCluster = new rds.DatabaseCluster(this, 'AuroraPostgresCluster', {
+      engine: rds.DatabaseClusterEngine.auroraPostgres({
+        version: rds.AuroraPostgresEngineVersion.VER_15_4,
+      }),
+      credentials: dbCredentials,
+      instanceProps: {
+        vpc,
+        instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MEDIUM),
+        vpcSubnets: {
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+        },
+        securityGroups: [dbSecurityGroup],
+      },
+      instances: 1,
+      defaultDatabaseName: 'effect_app',
+      backup: {
+        retention: cdk.Duration.days(7),
+      },
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // For development/testing
+      deletionProtection: false, // For development/testing
+      storageEncrypted: true,
     });
 
     // Create ECS Cluster
@@ -53,6 +97,9 @@ export class EffectAppStack extends cdk.Stack {
       ],
     });
 
+    // Add permissions to read database secrets
+    auroraCluster.secret?.grantRead(taskExecutionRole);
+
     // Get reference to ECR repository
     const ecrRepository = ecr.Repository.fromRepositoryName(this, 'EffectAppEcrRepo', 'effect-app');
 
@@ -76,6 +123,15 @@ export class EffectAppStack extends cdk.Stack {
       environment: {
         NODE_ENV: 'production',
         PORT: '3000',
+        DATABASE_HOST: auroraCluster.clusterEndpoint.hostname,
+        DATABASE_PORT: auroraCluster.clusterEndpoint.port.toString(),
+        DATABASE_NAME: 'effect_app',
+        DATABASE_SSL: 'true',
+        DATABASE_MAX_CONNECTIONS: '10',
+      },
+      secrets: {
+        DATABASE_USERNAME: ecs.Secret.fromSecretsManager(auroraCluster.secret!, 'username'),
+        DATABASE_PASSWORD: ecs.Secret.fromSecretsManager(auroraCluster.secret!, 'password'),
       },
       logging: ecs.LogDrivers.awsLogs({
         streamPrefix: 'effect-app',
@@ -98,6 +154,13 @@ export class EffectAppStack extends cdk.Stack {
     });
 
     effectAppSecurityGroup.connections.allowFromAnyIpv4(ec2.Port.tcp(3000));
+
+    // Allow ECS service to connect to Aurora PostgreSQL
+    dbSecurityGroup.addIngressRule(
+      effectAppSecurityGroup,
+      ec2.Port.tcp(5432),
+      'Allow ECS service to connect to Aurora PostgreSQL'
+    );
 
     // Create Fargate Service (following AWS sample pattern)
     const effectAppService = new ecs.FargateService(this, 'EffectAppService', {
@@ -140,7 +203,7 @@ export class EffectAppStack extends cdk.Stack {
         healthyHttpCodes: '200',
       },
       targets: [effectAppService],
-      pathPattern: '/*', // Match all paths
+      conditions: [elbv2.ListenerCondition.pathPatterns(['/*'])], // Match all paths
     });
 
     // Configure service auto scaling
@@ -264,6 +327,27 @@ export class EffectAppStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'SecurityGroupId', {
       value: effectAppSecurityGroup.securityGroupId,
       description: 'Security Group ID for ECS service',
+    });
+
+    // Aurora PostgreSQL outputs
+    new cdk.CfnOutput(this, 'AuroraClusterEndpoint', {
+      value: auroraCluster.clusterEndpoint.hostname,
+      description: 'Aurora PostgreSQL cluster endpoint',
+    });
+
+    new cdk.CfnOutput(this, 'AuroraClusterPort', {
+      value: auroraCluster.clusterEndpoint.port.toString(),
+      description: 'Aurora PostgreSQL cluster port',
+    });
+
+    new cdk.CfnOutput(this, 'AuroraSecretArn', {
+      value: auroraCluster.secret?.secretArn || 'No secret available',
+      description: 'Aurora PostgreSQL credentials secret ARN',
+    });
+
+    new cdk.CfnOutput(this, 'DatabaseName', {
+      value: 'effect_app',
+      description: 'Default database name',
     });
   }
 }

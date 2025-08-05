@@ -2,7 +2,7 @@ import { Model } from "@effect/sql"
 import { Effect } from "effect"
 import { Group } from "../Domain/Group.js"
 import { makeTestLayer } from "../lib/Layer.js"
-import { SqlLive } from "../Sql.js"
+import { SqlLive } from "../SqlAuto.js"
 
 export class GroupsRepo extends Effect.Service<GroupsRepo>()("Groups/Repo", {
   effect: Model.makeRepository(Group, {

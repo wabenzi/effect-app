@@ -3,7 +3,7 @@ import { Effect, pipe } from "effect"
 import { AccessToken } from "../Domain/AccessToken.js"
 import { User } from "../Domain/User.js"
 import { makeTestLayer } from "../lib/Layer.js"
-import { SqlLive } from "../Sql.js"
+import { SqlLive } from "../SqlAuto.js"
 
 export class UsersRepo extends Effect.Service<UsersRepo>()(
   "Accounts/UsersRepo",

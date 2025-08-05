@@ -8,7 +8,7 @@ This guide provides comprehensive instructions for deploying the Effect-TS HTTP 
 Internet → API Gateway → VPC Link → Application Load Balancer → Fargate Tasks
 ```
 
-### Components:
+### Components
 - **AWS Fargate**: Serverless container platform running the Effect-TS application
 - **Application Load Balancer (ALB)**: Load balances traffic across Fargate tasks
 - **API Gateway v2 (HTTP API)**: Provides external API endpoint with CORS, throttling, and monitoring

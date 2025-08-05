@@ -5,7 +5,7 @@ import type { GroupId } from "./Domain/Group.js"
 import { Group, GroupNotFound } from "./Domain/Group.js"
 import { policyRequire } from "./Domain/Policy.js"
 import { GroupsRepo } from "./Groups/Repo.js"
-import { SqlLive } from "./Sql.js"
+import { SqlLive } from "./SqlAuto.js"
 
 export class Groups extends Effect.Service<Groups>()("Groups", {
   effect: Effect.gen(function*() {

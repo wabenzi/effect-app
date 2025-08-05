@@ -1,4 +1,3 @@
-import { HttpApiMiddleware } from "@effect/platform"
 import { Effect, Schema } from "effect"
 import { HttpApiSchema } from "@effect/platform"
 
